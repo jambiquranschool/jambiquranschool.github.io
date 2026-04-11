@@ -634,57 +634,6 @@
 
   .galeri-item:hover .galeri-overlay { opacity: 1; }
 
-  /* ===== TESTIMONI ===== */
-  #testimoni { background: var(--putih-krem); }
-
-  .testi-track-wrap { overflow: hidden; }
-
-  .testi-track {
-    display: flex;
-    gap: 24px;
-    animation: scroll 35s linear infinite;
-    width: max-content;
-  }
-
-  .testi-track:hover { animation-play-state: paused; }
-
-  .testi-card {
-    background: var(--putih);
-    border: 1px solid rgba(45,155,90,0.1);
-    border-radius: 20px;
-    padding: 28px 26px;
-    width: 300px;
-    flex-shrink: 0;
-  }
-
-  .testi-stars { color: #f59e0b; font-size: 15px; margin-bottom: 14px; letter-spacing: 2px; }
-
-  .testi-card p {
-    font-size: 14px;
-    line-height: 1.7;
-    color: #444;
-    margin-bottom: 20px;
-    font-style: italic;
-  }
-
-  .testi-author {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .testi-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--hijau-pucat);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    border: 2px solid var(--hijau-muda);
-  }
-
-  .testi-name { font-size: 13px; font-weight: 700; color: var(--hitam); }
-  .testi-role { font-size: 11px; color: var(--abu); }
-
   /* ===== KONTAK ===== */
   #kontak { background: var(--putih); }
 
