@@ -77,7 +77,7 @@ async function submitForm() {
   }
 
   // ===== KIRIM KE GOOGLE SHEET =====
-  const SHEET_URL = 'https://link.sheet'; // ganti dengan URL Apps Script deploy
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzE2cT1XLUkurLZ8NGEyKl5EeczsPiec08VzAjrbZkDQcsfCgzLvlOT2p6EF2Bq-N9Zkg/exec';
   const payload = { namaOrtu, namaAnak, noWa, unit, pesan };
   try {
     await fetch(SHEET_URL, {
@@ -91,7 +91,7 @@ async function submitForm() {
   }
 
   // ===== REDIRECT KE WHATSAPP =====
-  const NOMOR_WA = '6282370679971'; // ganti dengan nomor WA admin (format internasional, tanpa +)
+  const NOMOR_WA = '6282370679971';
   const teks = encodeURIComponent(
     `*Pendaftaran Siswa Baru - Jambi Qur'an School*\n\n` +
     `Nama Orang Tua : ${namaOrtu}\n` +
