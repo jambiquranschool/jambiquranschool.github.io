@@ -1011,3 +1011,18 @@
   flex-direction: column;
   gap: 4px;
 }
+
+.maps-link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hijau-medium);
+  text-decoration: none;
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+
+.maps-link:hover {
+  color: var(--hijau-tua);
+  text-decoration: underline;
+}

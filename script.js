@@ -91,7 +91,7 @@ async function submitForm() {
   }
 
   // ===== REDIRECT KE WHATSAPP =====
-  const NOMOR_WA = '6282370679971';
+  const NOMOR_WA = '6285267681824';
   const teks = encodeURIComponent(
     `*Pendaftaran Siswa Baru - Jambi Qur'an School*\n\n` +
     `Nama Orang Tua : ${namaOrtu}\n` +
