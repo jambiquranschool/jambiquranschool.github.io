@@ -35,8 +35,8 @@ function openForm(title){
     '<h3>'+title+'</h3>'+
     '<p class="sub">Pilih cara Anda ingin berwaqaf.</p>'+
     '<div class="choices">'+
-      '<button class="choice" id="c-money"><span class="c-ico">💰</span><span><b>Sumbang Uang</b><small>Transfer bank atau QRIS</small></span></button>'+
-      '<button class="choice" id="c-mat"><span class="c-ico">🧱</span><span><b>Sumbang Bahan Bangunan</b><small>Beli langsung lewat toko bangunan rekanan</small></span></button>'+
+      '<button class="choice" id="c-money"><span class="c-ico">💰</span><span><b>Waqaf Uang</b><small>Transfer bank atau QRIS</small></span></button>'+
+      '<button class="choice" id="c-mat"><span class="c-ico">🧱</span><span><b>Waqaf Bahan Bangunan</b><small>Beli langsung lewat toko bangunan rekanan</small></span></button>'+
     '</div>';
   $("ov").classList.add("on");
   $("c-money").onclick = function(){ openMoney(title); };
@@ -45,10 +45,10 @@ function openForm(title){
 
 function openMaterial(title){
   var mapsUrl = STORE.maps || ("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(STORE.name+" "+STORE.address));
-  var msg = "Assalamu’alaikum, saya ingin menyumbang bahan bangunan untuk "+title+". Mohon info bahan dan harganya.";
+  var msg = "Assalamu’alaikum, saya ingin mewaqafkan bahan bangunan untuk "+title+". Mohon info bahan dan harganya.";
   $("modal").innerHTML =
     '<button class="x" onclick="closeM()" aria-label="Tutup">×</button>'+
-    '<h3>Sumbang Bahan Bangunan</h3>'+
+    '<h3>Waqaf Bahan Bangunan</h3>'+
     '<p class="sub">'+title+'</p>'+
     '<p class="small" style="margin:0 0 14px">Silakan hubungi toko bangunan rekanan kami. Sampaikan bahwa bahan akan diwaqafkan untuk '+title+', lalu toko akan membantu pengirimannya.</p>'+
     '<div class="store">'+
