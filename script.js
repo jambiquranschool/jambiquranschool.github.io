@@ -1,66 +1,43 @@
-// ===== NAVBAR SCROLL =====
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-});
+// Muncul saat di-scroll (bagian kontak)
+const fadeObserver=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:0.12});
+document.querySelectorAll(".fade-in").forEach(el=>fadeObserver.observe(el));
 
-// ===== HAMBURGER MENU =====
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+// Menu mobile
+const menu=document.getElementById('menu'),nav=document.getElementById('nav');
+menu.addEventListener('click',()=>{const o=nav.classList.toggle('open');menu.setAttribute('aria-expanded',o)});
+nav.addEventListener('click',e=>{if(e.target.closest('a'))nav.classList.remove('open');menu.setAttribute('aria-expanded',false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');menu.setAttribute('aria-expanded',false)}});
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
+// Saring pengumuman per unit
+const tombol=document.querySelectorAll('.filter button'),baris=document.querySelectorAll('#daftar li'),kosong=document.getElementById('kosong');
+tombol.forEach(b=>b.addEventListener('click',()=>{
+  tombol.forEach(x=>x.setAttribute('aria-pressed',x===b));
+  let n=0;baris.forEach(li=>{const ok=li.dataset.unit.split(' ').includes(b.dataset.f);li.hidden=!ok;if(ok)n++});
+  kosong.hidden=n>0;
+}));
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
-
-// ===== ANIMATED COUNTER =====
-function animateCount(el, target, suffix = '') {
-  let start = 0;
-  const duration = 2000;
-  const increment = target / (duration / 16);
-  const timer = setInterval(() => {
-    start += increment;
-    if (start >= target) {
-      start = target;
-      clearInterval(timer);
-    }
-    el.textContent = Math.floor(start).toLocaleString('id-ID') + suffix;
-  }, 16);
-}
-
-// ===== FADE-IN ON SCROLL =====
-const fadeEls = document.querySelectorAll('.fade-in');
-const counters = document.querySelectorAll('[data-target]');
-const countedEls = new Set();
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+// Video: pemutar dimuat otomatis saat bagian video terlihat di layar.
+const videoObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const box = e.target;
+    obs.unobserve(box);
+    const f = document.createElement('iframe');
+    f.src = box.dataset.embed.trim();
+    f.title = box.dataset.title;
+    f.allow = 'autoplay; encrypted-media; picture-in-picture';
+    f.allowFullscreen = true;
+    box.replaceChildren(f);
   });
-}, { threshold: 0.12 });
+}, { rootMargin: '200px' });
 
-fadeEls.forEach(el => observer.observe(el));
-
-// ===== COUNTER OBSERVER =====
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !countedEls.has(entry.target)) {
-      countedEls.add(entry.target);
-      const target = parseInt(entry.target.dataset.target);
-      const suffix = entry.target.closest('.stat-item')
-        ? (entry.target.dataset.target === '98' ? '%' : '+')
-        : '';
-      animateCount(entry.target, target, suffix);
-    }
-  });
-}, { threshold: 0.5 });
-
-counters.forEach(el => counterObserver.observe(el));
+document.querySelectorAll('.vbox').forEach(box => {
+  if (!box.dataset.embed.trim()) {
+    box.innerHTML = '<p class="nanti">Video segera hadir.</p>';
+    return;
+  }
+  videoObserver.observe(box);
+});
 
 // ===== FORM SUBMIT =====
 async function submitForm() {
@@ -106,3 +83,11 @@ async function submitForm() {
   document.getElementById('formArea').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
 }
+
+// Unit pendidikan: tampilkan panel sesuai tab yang ditekan
+const tabUnit = document.querySelectorAll('.unit-tabs button');
+const panelUnit = document.querySelectorAll('.unit-panel');
+tabUnit.forEach(b => b.addEventListener('click', () => {
+  tabUnit.forEach(x => x.setAttribute('aria-pressed', x === b));
+  panelUnit.forEach(p => { p.hidden = p.dataset.unit !== b.dataset.u; });
+}));
